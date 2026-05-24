@@ -243,15 +243,15 @@ export async function handler(chatUpdate) {
     this.pushMessage(chatUpdate.messages).catch(console.error)
     let m = chatUpdate.messages[chatUpdate.messages.length - 1]
     if (!m) return
-if (m.message?.protocolMessage?.type === 'MESSAGE_EDIT') {
-    const key = m.message.protocolMessage.key;
-    const editedMessage = m.message.protocolMessage.editedMessage;
-    m.key = key;
-    m.message = editedMessage;
-    m.text = editedMessage.conversation || editedMessage.extendedTextMessage?.text || '';
-    m.mtype = Object.keys(editedMessage)[0];
-    console.log(chalk.magentaBright(`[CORE_LOG] Intercettata modifica pacchetto messaggio su ID: ${key.id}`));
-}
+    if (m.message?.protocolMessage?.type === 'MESSAGE_EDIT') {
+        const key = m.message.protocolMessage.key;
+        const editedMessage = m.message.protocolMessage.editedMessage;
+        m.key = key;
+        m.message = editedMessage;
+        m.text = editedMessage.conversation || editedMessage.extendedTextMessage?.text || '';
+        m.mtype = Object.keys(editedMessage)[0];
+        console.log(chalk.magentaBright(`[CORE_LOG] Intercettata modifica pacchetto messaggio su ID: ${key.id}`));
+    }
     m = smsg(this, m, global.store)
     if (!m || !m.key || !m.chat || !m.sender) return
     if (m.fromMe) return
@@ -527,25 +527,30 @@ if (m.message?.protocolMessage?.type === 'MESSAGE_EDIT') {
                 typeof _prefix === 'string' ? [[new RegExp(str2Regex(_prefix)).exec(m.text), _prefix]] :
                 [[[], new RegExp]]).find(p => p[1])
 
+            // 🛡️ PROTEZIONE CRASH: Involucro try/catch protettivo per evitare il fallimento a catena del ciclo prima dei comandi
             if (typeof plugin.before === 'function') {
-                if (await plugin.before.call(this, m, {
-                    match,
-                    conn: this,
-                    participants: normalizedParticipants,
-                    groupMetadata,
-                    user: { admin: isAdmin ? 'admin' : null },
-                    bot: { admin: isBotAdmin ? 'admin' : null },
-                    isSam,
-                    isROwner,
-                    isOwner,
-                    isRAdmin,
-                    isAdmin,
-                    isBotAdmin,
-                    isPrems,
-                    chatUpdate,
-                    __dirname: ___dirname,
-                    __filename
-                })) continue
+                try {
+                    if (await plugin.before.call(this, m, {
+                        match,
+                        conn: this,
+                        participants: normalizedParticipants,
+                        groupMetadata,
+                        user: { admin: isAdmin ? 'admin' : null },
+                        bot: { admin: isBotAdmin ? 'admin' : null },
+                        isSam,
+                        isROwner,
+                        isOwner,
+                        isRAdmin,
+                        isAdmin,
+                        isBotAdmin,
+                        isPrems,
+                        chatUpdate,
+                        __dirname: ___dirname,
+                        __filename
+                    })) continue
+                } catch (e) {
+                    console.error(chalk.redBright(`[PLUGIN_BEFORE_ERR] Errore intercettato nel sub-modulo 'before' di ${name}:`), e)
+                }
             }
 
             if (typeof plugin !== 'function') continue
@@ -628,7 +633,7 @@ if (m.message?.protocolMessage?.type === 'MESSAGE_EDIT') {
                 if (user.banned && !isROwner && name !== 'creatore-banuser.js') {
                     if (user.antispam > 2) return
                     await this.sendMessage(m.chat, {
-                        text: `⚠️ *[ERROR-BOT: TERMINAL_BAN]* ⚠️\n\nIl nucleo centrale ha revocato i tuoi privilegi.\n\n${user.bannedReason ? `🛑 Log Errore: ${user.bannedReason}` : `🛑 Log Errore: Sospensione arbitraria dall'amministratore`}\n\n🤖 Invia una richiesta tramite *${usedPrefix}segnala* se ritieni si tratti di un falso positivo.`
+                        text: `⚠️ *[ERROR-BOT: TERMINAL_BAN]* ⚠️\n\nIl nucleo centrale ha revocato i tuoi privileges.\n\n${user.bannedReason ? `🛑 Log Errore: ${user.bannedReason}` : `🛑 Log Errore: Sospensione arbitraria dall'amministratore`}\n\n🤖 Invia una richiesta tramite *${usedPrefix}segnala* se ritieni si tratti di un falso positivo.`
                     }, { quoted: m }).catch(e => console.error('[ERRORE]', e))
                     user.antispam++
                     return
@@ -836,6 +841,10 @@ global.dfail = async (type, m, conn) => {
 
     const nome = m.pushName || 'User_Node'
     const etarandom = Math.floor(Math.random() * 21) + 13
+    
+    // 🛡️ FIX REFERENCE_ERR: Calcolo dinamico del prefisso sicuro per evitare l'eccezione dell'oggetto non definito
+    let currentPrefix = global.prefix || '.'
+    
     const msg = {
         sam: '⛔ *[ERR_COMPILATION_01]: DEVELOPER_KEY_REQUIRED*\n\nQuesta risorsa è cifrata ed eseguibile solo dal creatore originario.',
         rowner: '⛔ *[ERR_COMPILATION_02]: ROOT_ACCESS_REQUIRED*\n\nI tuoi identificativi non corrispondono alla rete dei nodi master di Error-Bot.',
@@ -851,7 +860,7 @@ global.dfail = async (type, m, conn) => {
 Il tuo hash identificativo non è presente nel database locale di Error-Bot. È necessaria una registrazione di sicurezza.
 
 ⚙️ *Sintassi di inserimento:*
-${usedPrefix}reg ${nome} ${etarandom}`,
+${currentPrefix}reg ${nome} ${etarandom}`,
         restrict: '🛑 *[ERR_CORE_11]: INJECTOR_MUTED*\n\nQuesta funzione interna è stata congelata temporaneamente per patch di sicurezza.',
         disabled: '🛑 *[ERR_CORE_12]: COMPONENT_DISABLED*\n\nIl codice sorgente di questo comando è stato deregistrato dal pannello principale.'
     }[type]
