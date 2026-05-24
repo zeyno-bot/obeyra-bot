@@ -50,7 +50,7 @@ handler.before = async function (m, { conn, isAdmin, isOwner, isBotAdmin, isROwn
     const fileHash = crypto.createHash('md5').update(mediaBuffer).digest('hex')
 
     if (global.db.data.goreCache[fileHash] === true) {
-      return await punishUser(conn, m, user, isBotAdmin, '𝐂𝐨𝐧𝐭𝐞𝐧𝐮𝐭𝐨 𝐠𝐫𝐚𝐟𝐢𝐜𝐨 𝐠𝐢à 𝐫𝐢𝐥𝐞𝐯𝐚𝐭𝐨')
+      return await punishUser(conn, m, user, isBotAdmin, '𝘗𝘈𝘊𝘒𝘌𝘛_𝘒𝘕𝘖𝘞𝘕_𝘎𝘖𝘙𝘌_𝘋𝘌𝘛𝘌𝘊𝘛𝘌𝘋')
     }
 
     if (global.db.data.goreCache[fileHash] === false) {
@@ -124,7 +124,7 @@ handler.before = async function (m, { conn, isAdmin, isOwner, isBotAdmin, isROwn
     global.db.data.goreCache[fileHash] = isHighRisk
 
     if (isHighRisk) {
-      return await punishUser(conn, m, user, isBotAdmin, '𝐂𝐨𝐧𝐭𝐞𝐧𝐮𝐭𝐨 𝐠𝐫𝐚𝐟𝐢𝐜𝐨 / 𝐯𝐢𝐨𝐥𝐞𝐧𝐭𝐨 𝐫𝐢𝐥𝐞𝐯𝐚𝐭𝐨')
+      return await punishUser(conn, m, user, isBotAdmin, '𝘊𝘖𝘕𝘛𝘌𝘕𝘜𝘛𝘖_𝘎𝘙𝘈𝘍𝘐𝘊𝘖_𝘝𝘐𝘖𝘓𝘌𝘕𝘛𝘖_𝘙𝘐𝘓𝘌𝘝𝘈𝘛𝘖')
     }
   } catch (e) {
     console.error('Errore antigore:', e)
@@ -139,8 +139,22 @@ async function punishUser(conn, m, user, isBotAdmin, reason) {
   try { await conn.sendMessage(m.chat, { delete: m.key }) } catch {}
 
   if (user.warn < 3) {
+    let warnMsg = `
+☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝘎𝘖𝘙𝘌_𝘋𝘌𝘛𝘌𝘊𝘛𝘐𝘖𝘕 ☠️
+───────────────────────
+⎔ 𝘚𝘺𝘴_𝘚𝘵𝘢𝘵𝗎𝗌: 𝘜𝘕𝘚𝘈𝘍𝘌_𝘗𝘈𝘊𝘒𝘌𝘛_𝘍𝘖𝘜𝘕𝘋
+⎔ 𝘛𝘢𝘳𝘨𝘦𝘵_𝘏𝘰𝓼𝘵: @${senderTag}
+⎔ 𝘍𝘪𝘭𝘵𝘦𝘳_𝘓𝘰𝘨: ${reason}
+⎔ 𝘚𝘺𝘴_𝘞𝘢𝘳𝘯: *${user.warn}/3*
+───────────────────────
+
+» 𝘈𝘝𝘝𝘐𝘚𝘖: Rilevato materiale splatter, gore o ad alto tasso di violenza visiva. I media non autorizzati sono stati distrutti. Al terzo blocco scatta l'estromissione permanente.
+
+͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞
+_𝘚𝘺𝘴𝘵𝘦ม 𝘸𝘪𝘭𝘭 𝘯𝘰𝘵 𝘳𝘦𝘉𝘰𝘰𝘵. 𝘌𝘯𝘫𝘰ย 𝘵𝘩𝗲 𝘤𝘩𝘢𝘰𝘴._`.trim()
+
     await conn.sendMessage(m.chat, {
-      text: `╭━━━━━━━🚫━━━━━━━╮\n*✦ 𝐀𝐍𝐓𝐈 𝐆𝐎𝐑𝐄 ✦*\n╰━━━━━━━🚫━━━━━━━╯\n\n*@${senderTag}*\n*⚠️ ${reason}*\n*📌 𝐀𝐯𝐯𝐢𝐬𝐨:* *${user.warn}/3*`,
+      text: warnMsg,
       mentions: [m.sender]
     }, { quoted: m })
     return false
@@ -148,15 +162,41 @@ async function punishUser(conn, m, user, isBotAdmin, reason) {
 
   user.warn = 0
   if (!isBotAdmin) {
+    let failMsg = `
+☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝘎𝘖𝘙𝘌_𝘓𝘐𝘔𝘐𝘛_𝘌𝘟𝘊𝘌𝘌𝘋𝘌𝘋 ☠️
+───────────────────────
+⎔ 𝘛𝘢𝘳𝘨𝘦𝘵_𝘏𝘰𝓼𝘵: @${senderTag}
+⎔ 𝘚𝘺𝘴_𝘞𝘢𝘳𝘯: *3/3*
+⎔ 𝘚𝘺𝘴_𝘈𝘤𝘵𝘪𝘰𝘯: 𝘒𝘐𝘊𝘒_𝘍𝘈𝘐𝘓𝘌𝘋_𝘕𝘖_𝘈𝘋𝘔𝘐𝘕
+───────────────────────
+
+» 𝘓𝘖𝘎: L'host ha superato la soglia di tolleranza di sanzioni per violenza estrema. Impossibile terminare il nodo: il firewall del bot non dispone di privilegi di amministrazione (Sys_Admin) in questa griglia.
+
+͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞
+_𝘚𝘺𝘴𝘵𝘦𝘮 𝘸𝘪𝘭𝘭 𝘯𝘰𝘵 𝘳𝘦𝘉𝘰𝘰𝘵. 𝘌𝘯𝘫𝘰ย 𝘵𝘩𝗲 𝘤𝘩𝘢𝘰𝘴._`.trim()
+
     await conn.sendMessage(m.chat, {
-      text: `╭━━━━━━━🚫━━━━━━━╮\n*✦ 𝐀𝐍𝐓𝐈 𝐆𝐎𝐑𝐄 ✦*\n╰━━━━━━━🚫━━━━━━━╯\n\n*@${senderTag}*\n*⚠️ 𝐇𝐚 𝐫𝐚𝐠𝐠𝐢𝐮𝐧𝐭𝐨 𝟑/𝟑 𝐚𝐯𝐯𝐢𝐬𝐢*\n*❌ 𝐍𝐨𝐧 𝐩𝐨𝐬𝐬𝐨 𝐫𝐢𝐦𝐮𝐨𝐯𝐞𝐫𝐥𝐨: 𝐢𝐥 𝐛𝐨𝐭 𝐧𝐨𝐧 è 𝐚𝐝𝐦𝐢𝐧*`,
+      text: failMsg,
       mentions: [m.sender]
     }, { quoted: m })
     return false
   }
 
+  let kickMsg = `
+☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝘛𝘌𝘙𝘔𝘐𝘕𝘈𝘛𝘌_𝘏𝘖𝘚𝘛 ☠️
+───────────────────────
+⎔ 𝘛𝘢𝘳𝘨𝘦𝘵_𝘏𝘰𝓼𝘵: @${senderTag}
+⎔ 𝘚𝘺𝘴_𝘚𝘵𝘢𝘵𝗎𝗌: 𝘉𝘓𝘈𝘊𝘒𝘓𝘐𝘚𝘛𝘌𝘋_𝘕𝘖𝘋𝘌
+⎔ 𝘙𝘦𝘢𝘴𝘰𝘯_𝘊𝘰𝘥𝘦: 𝘎𝘖𝘙𝘌_𝘝𝘐𝘖𝘓𝘈𝘛𝘐𝘖𝘕
+───────────────────────
+
+» 𝘓𝘖𝘎: Espulsione eseguita. La trasmissione ripetuta di file multimediali corrotti contenenti gore ha attivato la rimozione forzata dell'host dall'infrastruttura del gruppo.
+
+͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞
+_𝘚𝘺𝘴𝘵𝘦𝘮 𝘸𝘪𝘭𝘭 𝘯𝘰𝘵 𝘳𝘦𝘉𝘰𝘰𝘵. 𝘌𝘯𝘫𝘰ย 𝘵𝘩𝗲 𝘤𝘩𝘢𝘰𝘴._`.trim()
+
   await conn.sendMessage(m.chat, {
-    text: `╭━━━━━━━🚫━━━━━━━╮\n*✦ 𝐀𝐍𝐓𝐈 𝐆𝐎𝐑𝐄 ✦*\n╰━━━━━━━🚫━━━━━━━╯\n\n*@${senderTag}*\n*🚷 𝐑𝐢𝐦𝐨𝐬𝐬𝐨 𝐝𝐚𝐥 𝐠𝐫𝐮𝐩𝐩𝐨*\n*📌 𝐌𝐨𝐭𝐢𝐯𝐨:* *𝐂𝐨𝐧𝐭𝐞𝐧𝐮𝐭𝐢 𝐠𝐫𝐚𝐟𝐢𝐜𝐢 / 𝐯𝐢𝐨𝐥𝐞𝐧𝐭𝐢*`,
+    text: kickMsg,
     mentions: [m.sender]
   }, { quoted: m })
 
