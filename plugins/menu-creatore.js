@@ -1,41 +1,46 @@
+import { promises as fs } from 'fs'
+import { join } from 'path'
 import { xpRange } from '../lib/levelling.js'
 import moment from 'moment-timezone'
 import os from 'os'
-import { promises } from 'fs'
-import { join } from 'path'
+
+// Configurazione immagini random (tutte .jpeg)
+const menuImages = [
+  './menu-1.jpeg',
+  './menu-2.jpeg',
+  './menu-3.jpeg'
+]
 
 const defaultMenu = {
   before: `
-┎━━━━━━━━━━━━━━━━━━━┑
-┃   ✧  𝐁𝐋𝐃 - 𝐂𝐑𝐄𝐀𝐓𝐎𝐑  ✧   ┃
-┖━━━━━━━━━━━━━━━━━━━┙
-┌───────────────────┐
-  👤 𝙾𝚠𝚗𝚎𝚛: %name
-  ⚙️ 𝙼𝚘𝚍𝚎: %mode
-  🖥️ 𝙿𝚕𝚊𝚝𝚏𝚘𝚛𝚖: %platform
-└───────────────────┘
+☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝘙𝘖𝘖𝘛_𝘊𝘖𝘙𝘌 ☠️
+───────────────────────
+⎔ 𝘚𝘺𝘴_𝘖𝘸𝘯𝘦𝘳: %name
+⎔ 𝘌𝘹𝘦𝘤_𝘔𝘰𝘥𝘦: %mode
+⎔ 𝘖𝘚_𝘛𝘦𝘳𝘮𝘪𝘯𝘢𝘭: %platform
+───────────────────────
 
-*〘 ᴀᴄᴄᴇssɪɴɢ ʀᴏᴏᴛ ᴘʀᴏᴛᴏᴄᴏʟ... 〙*
+» 𝘐𝘕𝘐𝘡𝘐𝘈𝘓𝘐𝘡𝘡𝘈𝘡𝘐count𝘕𝘌 𝘗𝘙𝘖𝘛𝘖𝘊𝘖𝘓𝘓𝘖 𝘉𝘠𝘗𝘈𝘚𝘚...
 `.trimStart(),
-  header: '┍━━━〔 %category 〕━━━┑',
-  body: '┇ 👨‍💻  *%cmd*',
-  footer: '┕━━━━━──ׄ──ׅ──ׄ──━━━━━┙\n',
-  after: `_ʙʟᴅ-ʙᴏᴛ ᴀᴅᴍɪɴ ɪɴᴛᴇʀꜰᴀᴄᴇ_`
+  header: 'ョ ── %category 𪚥',
+  body: '    ⤿ 👨‍💻 %cmd ╳',
+  footer: '͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞\n',
+  after: `_𝘚𝘺𝘴𝘵𝘦𝘮 𝘸𝘪𝘭𝘭 𝘯𝘰𝘵 𝘳𝘦𝘉𝘰𝘰𝘵. 𝘌𝘯𝘫𝘰ย 𝘵𝘩𝗲 𝘤𝘩𝘢𝘰𝘴._`
 }
 
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
   let tags = {
-    'creatore': 'ꜱʏꜱᴛᴇᴍ ᴏᴠᴇʀʀɪᴅᴇ'
+    'creatore': '𝘚𝘠𝘚𝘛𝘌𝘔_𝘔𝘈𝘓𝘍𝘜𝘕𝘊𝘛𝘐badge_𝘖𝘝𝘌𝘙𝘙𝘐𝘋𝘌'
   }
 
   try {
     await conn.sendPresenceUpdate('composing', m.chat)
-    
+
     let name = await conn.getName(m.sender)
     let _uptime = process.uptime() * 1000
     let uptime = clockString(_uptime)
-    let mode = global.opts['self'] ? 'Privato' : 'Pubblico'
-    let platform = os.platform()
+    let mode = global.opts['self'] ? '𝘗𝘳𝘪𝘷𝘢𝘵𝘰_𝘓𝘰𝘤𝘬' : '𝘗𝘶𝘣𝘣𝘭𝘪𝘤𝘰_𝘎𝘳𝘪𝘥'
+    let platform = os.platform().toUpperCase()
 
     let help = Object.values(global.plugins).filter(p => !p.disabled).map(p => ({
       help: Array.isArray(p.help) ? p.help : [p.help],
@@ -68,23 +73,40 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 
     let text = _text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join('|')})`, 'g'), (_, name) => '' + replace[name])
 
-    await m.react('👨‍💻')
+    await m.react('💥')
 
-    // --- INVIO SOLO TESTO (RIMOSSO VIDEO/IMMAGINE) ---
+    // Estrazione random dell'immagine .jpeg
+    let randomImg = menuImages[Math.floor(Math.random() * menuImages.length)]
+    let imageBuffer = null
+    
+    try {
+      imageBuffer = await fs.readFile(randomImg)
+    } catch (e) {
+      console.log(`⚠️ Immagine ${randomImg} non trovata, tento il recupero...`)
+      for (let img of menuImages) {
+        try {
+          imageBuffer = await fs.readFile(img)
+          break
+        } catch (err) {}
+      }
+    }
+
+    // Invio finale configurato come immagine con didascalia ed estetica hacker
     await conn.sendMessage(m.chat, {
-      text: text.trim(),
+      ...(imageBuffer ? { image: imageBuffer } : {}),
+      caption: text.trim(),
       contextInfo: {
         mentionedJid: [m.sender],
         forwardedNewsletterMessageInfo: {
           newsletterJid: '120363232743845068@newsletter',
-          newsletterName: "✧ 𝙱𝙻𝙳-𝙱𝙾𝚃 𝙲𝚁𝙴𝙰𝚃𝙾𝚁 ✧"
+          newsletterName: "☠️ ᴇʀʀᴏʀ⁴⁰⁴ // ʀᴏᴏᴛ ᴄᴏʀᴇ ☠️"
         }
       }
     }, { quoted: m })
 
   } catch (e) {
     console.error(e)
-    conn.reply(m.chat, '❌ Error in Creator Module.', m)
+    conn.reply(m.chat, '❌ 𝘍𝘈𝘛𝘈𝘓_𝘌𝘙𝘙𝘖𝘙: Impossibile eseguire l\'override del modulo proprietario.', m)
   }
 }
 
