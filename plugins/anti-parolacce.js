@@ -7,24 +7,62 @@ handler.before = async function (m, { conn, isAdmin, isBotAdmin, isOwner }) {
     let user = global.db.data.users[m.sender]
     let chat = global.db.data.chats[m.chat]
     const t = uhuh.exec(m.text)
+    
     if (chat.antiparolacce && !isOwner && !isAdmin) {
         const decodedSender = conn.decodeJid(m.sender)
         user.warn += 1
+        
+        // Tentativo di rimozione del messaggio volgare se il bot è admin
+        if (isBotAdmin) {
+            try { await conn.sendMessage(m.chat, { delete: m.key }) } catch {}
+        }
+
         if (!(user.warn >= 4)) {
+            let warnMsg = `
+☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝘗𝘙𝘖𝘍𝘈𝘕𝘐𝘛𝘠_𝘋𝘌𝘛𝘌𝘊𝘛𝘌𝘋 ☠️
+───────────────────────
+⎔ 𝘚𝘺𝘴_𝘚𝘵𝘢𝘵𝗎𝗌: 𝘓𝘌𝘟𝘐𝘊𝘈𝘓_𝘝𝘐𝘖𝘓𝘈𝘛𝘐𝘖𝘕
+⎔ 𝘛𝘢𝘳𝘨𝘦𝘵_𝘏𝘰𝓼𝘵: @${decodedSender.split('@')[0]}
+⎔ 𝘗𝘬𝘵_𝘔𝘢𝘵𝘤𝘩: [ ${t ? t[0] : '𝘜𝘕𝘒𝘕𝘖𝘞𝘕_𝘚𝘛𝘙𝘐𝘕𝘎'} ]
+⎔ 𝘚𝘺𝘴_𝘞𝘢𝘳𝘯: *${user.warn}/4*
+───────────────────────
+
+» 𝘈𝘝𝘝𝘐𝘚𝘖: Rilevato linguaggio non autorizzato o stringhe testuali blacklistate nel buffer di testo. Il messaggio è stato rimosso. Al raggiungimento del limite massimo (4/4) l'host verrà bannato.
+
+͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞
+_𝘚𝘺𝘴𝘵𝘦System 𝘸𝘪𝘭𝘭 𝘯𝘰𝘵 𝘳𝘦𝘉𝘰𝘰𝘵. 𝘌𝘯𝘫𝘰ย 𝘵𝘩𝗲 𝘤𝘩𝘢𝘰𝘴._`.trim()
+
             await conn.sendMessage(m.chat, {
-                text: `${user.warn == 1 ? `*@${decodedSender.split`@`[0]}*` : `*@${decodedSender.split`@`[0]}*`}, hai: (${t}) avvertimenti... hai: *${user.warn}/4*\n\ndi avvertimenti.`,
+                text: warnMsg,
                 mentions: [decodedSender]
             }, { quoted: m })
         }
 
         if (user.warn >= 4) {
             user.warn = 0
+            user.banned = true
+            
+            let kickMsg = `
+☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝘏𝘜𝘉_𝘉𝘈𝘕_𝘌𝘟𝘌𝘊𝘜𝘛𝘌𝘋 ☠️
+───────────────────────
+⎔ 𝘛𝘢𝘳𝘨𝘦𝘵_𝘏𝘰𝓼𝘵: @${decodedSender.split('@')[0]}
+⎔ 𝘚𝘺𝘴_𝘚𝘵𝘢𝘵𝗎𝗌: 𝘓𝘐𝘔𝘐𝘛_𝘌𝘟𝘊𝘌𝘌𝘋𝘌𝘋
+⎔ 𝘚𝘺𝘴_𝘈𝘤𝘵𝘪𝘰n: 𝘗𝘜𝘙𝘎𝘌_𝘍𝘙𝘖𝘔_𝘕𝘖𝘋𝘌
+───────────────────────
+
+» 𝘓𝘖𝘎: L'host ha ignorato ripetutamente i filtri sui contenuti testuali imposti dal modulo antiprofanità. Il firewall ha inserito l'ID utente nella blacklist locale ed eseguito l'espulsione immediata dalla griglia.
+
+͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞
+_𝘚𝘺𝘴𝘵𝘦System 𝘸𝘪𝘭𝘭 𝘯𝘰𝘵 𝘳𝘦𝘉𝘰𝘰𝘵. 𝘌𝘯𝘫𝘰ย 𝘵𝘩𝗲 𝘤𝘩𝘢𝘰𝘴._`.trim()
+
             await conn.sendMessage(m.chat, {
-                text: `sparisci \n*@${decodedSender.split`@`[0]}*`,
+                text: kickMsg,
                 mentions: [decodedSender]
             }, { quoted: m })
-            user.banned = true
-            await conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+            
+            if (isBotAdmin) {
+                await conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+            }
         }
     }
     return true
