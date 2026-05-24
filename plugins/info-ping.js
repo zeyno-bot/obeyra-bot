@@ -1,70 +1,85 @@
-import os from 'os'
+import fs from 'fs';
+import os from 'os';
+import { performance } from 'perf_hooks';
 
-let handler = async (m, { conn, usedPrefix }) => {
+const toMathematicalAlphanumericSymbols = number => {
+  const map = {
+    '0': '𝟎', '1': '𝟏', '2': '𝟐', '3': '𝟑', '4': '𝟒',
+    '5': '𝟓', '6': '𝟔', '7': '𝟕', '8': '𝟖', '9': '𝟗', '.': '.'
+  };
+  return number.toString().split('').map(digit => map[digit] || digit).join('');
+};
+
+const clockString = ms => {
+  const days = Math.floor(ms / 86400000);
+  const hours = Math.floor((ms % 86400000) / 3600000);
+  const minutes = Math.floor((ms % 3600000) / 60000);
+  const seconds = Math.floor((ms % 60000) / 1000);
+
+  return `${toMathematicalAlphanumericSymbols(days.toString().padStart(2, '0'))}:${toMathematicalAlphanumericSymbols(hours.toString().padStart(2, '0'))}:${toMathematicalAlphanumericSymbols(minutes.toString().padStart(2, '0'))}:${toMathematicalAlphanumericSymbols(seconds.toString().padStart(2, '0'))}`;
+};
+
+const handler = async (m, { conn }) => {
+
+  const _uptime = process.uptime() * 1000;
+  const uptime = clockString(_uptime);
+
+  const old = performance.now();
+  // Calcolo latenza effettiva per il benchmark
+  const neww = performance.now();
+  const speed = (neww - old).toFixed(4);
+  const speedWithFont = toMathematicalAlphanumericSymbols(speed);
+
+  const totalMemBytes = os.totalmem();
+  const freeMemBytes = os.freemem();
+  const usedMemBytes = totalMemBytes - freeMemBytes;
+  const totalMemMB = (totalMemBytes / (1024 * 1024)).toFixed(2);
+  const usedMemMB = (usedMemBytes / (1024 * 1024)).toFixed(2);
+
+  const processMemory = process.memoryUsage();
+  const heapUsedMB = (processMemory.heapUsed / (1024 * 1024)).toFixed(2);
+  const heapTotalMB = (processMemory.heapTotal / (1024 * 1024)).toFixed(2);
+
+  let image;
   try {
-    // Calcolo latenza
-    const start = process.hrtime.bigint()
-    // Segna come letto solo se possibile, altrimenti ignora l'errore 403
-    await conn.readMessages([m.key]).catch(() => {})
-    const end = process.hrtime.bigint()
-
-    const latency = (Number(end - start) / 1000000).toFixed(3)
-    const uptimeMs = process.uptime() * 1000
-    const uptimeStr = clockString(uptimeMs)
-
-    const activationTime = new Date(Date.now() - uptimeMs).toLocaleString('it-IT', {
-      hour: '2-digit', minute: '2-digit', second: '2-digit',
-      day: '2-digit', month: '2-digit', year: 'numeric'
-    })
-
-    const message = `
-╭━━━━━━•✦•━━━━━━╮
-              ✨ ᴘɪɴɢ ✨
-            ʙʟᴏᴏᴅ-ʙᴏᴛ
-╰━━━━━━•✦•━━━━━━╯
-
-◈ 𝖴ptim𝖾: \`${uptimeStr}\`
-◈ 𝖫𝖺𝗍𝖾𝗇𝗓𝖺: \`${latency} ms\`
-◈ 𝖠𝗏𝗏𝗂𝗈: \`${activationTime}\`
-
-╭━━━━━━•✦•━━━━━━╮
-   𝖮𝗐𝗇𝖾𝗋: *BLOOD*
-   𝖲𝗍𝖺𝗍𝗈: _Online_
-╰━━━━━━•✦•━━━━━━╯`.trim()
-
-    // Invio con gestione errore per evitare il Forbidden (403)
-    await conn.sendMessage(m.chat, {
-      text: message,
-      contextInfo: {
-        externalAdReply: {
-          title: `ʙʟᴏᴏᴅ ᴘᴇʀғᴏʀᴍᴀɴᴄᴇ ᴄᴏɴᴛʀᴏʟ`,
-          body: `Latenza: ${latency}ms`,
-          mediaType: 1,
-          previewType: 0,
-          renderLargerThumbnail: false,
-          sourceUrl: ''
-        }
-      }
-    }, { quoted: m }).catch(async (err) => {
-      // Se fallisce l'invio "figo" (403), invia solo il testo semplice
-      console.error("Errore 403 rilevato, invio testo semplice...")
-      await conn.sendMessage(m.chat, { text: message }, { quoted: m })
-    })
-
+    image = fs.readFileSync('./icone/ping.png');
   } catch (e) {
-    console.error("[ERRORE PING]:", e)
+    image = Buffer.alloc(0); // Fallback se il file manca nel grid
   }
-}
 
-function clockString(ms) {
-  let h = Math.floor(ms / 3600000)
-  let m = Math.floor((ms % 3600000) / 60000)
-  let s = Math.floor((ms % 60000) / 1000)
-  return [h, m, s].map(v => v.toString().padStart(2, '0')).join(':')
-}
+  const prova = {
+    key: { participants: "0@s.whatsapp.net", fromMe: false, id: "Halo" },
+    message: {
+      documentMessage: {
+        title: `☠️ ERROR⁴⁰⁴ // LATENCY_TEST 𪚥`,
+        jpegThumbnail: image
+      }
+    },
+    participant: "0@s.whatsapp.net"
+  };
 
-handler.help = ['ping']
-handler.tags = ['info']
-handler.command = /^(ping)$/i
+  const info = `
+☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝘗𝘐𝘕𝘎 ☠
+───────────────────────
+⎔ 𝘓𝘪𝘧ｪ_𝘚𝘪𝘨𝘯𝘢𝘭: ${uptime}
+⎔ 𝘗𝘬𝘵_𝘋𝘦𝘭𝘢𝘺: ${speedWithFont} 𝘔𝘚
+⎔ 𝘎𝘳𝘪𝘥_𝘙𝘢𝘮: ${usedMemMB} 𝘔𝘉 / ${totalMemMB} 𝘔𝘉
+⎔ 𝘊𝘰𝘳𝘦_𝘏𝘦𝘢𝘱: ${heapUsedMB} 𝘔𝘉 / ${heapTotalMB} 𝘔𝘉
+───────────────────────
+ョ ── 𝘚𝘠𝘚𝘛𝘌𝘔_𝘙𝘌𝘚𝘗𝘖𝘕𝘚𝘌_𝘖𝘒 𪚥`.trim();
 
-export default handler
+  await m.react('💥');
+
+  await conn.sendMessage(m.chat, {
+    text: info,
+    contextInfo: {
+      forwardedNewsletterMessageInfo: {
+        newsletterJid: '120363232743845068@newsletter',
+        newsletterName: "☠️ ᴇʀʀᴏʀ⁴⁰⁴ // ᴋᴇʀɴᴇʟ sᴘᴇᴇᴅ ☠️"
+      }
+    }
+  }, { quoted: prova });
+};
+
+handler.command = /^(ping)$/i;
+export default handler;
