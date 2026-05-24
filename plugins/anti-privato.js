@@ -14,10 +14,10 @@ export async function before(m, { isOwner, isRowner, isMods }) {
 ───────────────────────
 ⎔ 𝘚𝘺𝘴_𝘚𝘵𝘢𝘵𝗎𝗌: 𝘜𝘕𝘈𝘜𝘛𝘏𝘖𝘙𝘐𝘡𝘌𝘋_𝘋𝘔_𝘋𝘌𝘛𝘌𝘊𝘛𝘌𝘋
 ⎔ 𝘛𝘢𝘳𝘨𝘦𝘵_𝘏𝘰𝓼𝘵: @${m.sender.split('@')[0]}
-⎔ 𝘚𝘺𝘴_𝘈𝘤𝘵𝘪𝘰𝘯: 𝘏𝘖𝘚𝘛_𝘉𝘓化𝘊𝘒_𝘌𝘟𝘌𝘊𝘜𝘛𝘌𝘋
+⎔ 𝘚𝘺𝘴_𝘈𝘤𝘵𝘪𝘰ion: 𝘏𝘖𝘚𝘛_𝘉𝘓化𝘊𝘒_𝘌𝘟𝘌𝘊𝘜𝘛𝘌𝘋
 ───────────────────────
 
-» 𘘓𘘚𘘛: Il firewall Anti-Privato è attivo su questa unità centrale. Qualsiasi interazione diretta al di fuori dei canali o dei gruppi autorizzati provoca l'interruzione immediata dei flussi e il confinamento dell'host mittente.
+» 𝘓𝘖𝘎: Il firewall Anti-Privato è attivo su questa unità centrale. Qualsiasi interazione diretta al di fuori dei canali o dei gruppi autorizzati provoca l'interruzione immediata dei flussi e il confinamento dell'host mittente.
 
 ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞
 _𝘚𝘺𝘴𝘵𝘦System 𝘸𝘪𝘭𝘭 𝘯𝘰𝘵 𝘳𝘦𝘉𝘰𝘰𝘵. 𝘌𝘯𝘫𝘰ย 𝘵𝘩𝗲 𝘤𝘩𝘢𝘰ˢ._`.trim();
