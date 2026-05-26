@@ -4,7 +4,6 @@ import { xpRange } from '../lib/levelling.js'
 import moment from 'moment-timezone'
 import os from 'os'
 
-// Configurazione immagini random (tutte .jpeg)
 const menuImages = [
   './menu-1.jpeg',
   './menu-2.jpeg',
@@ -15,9 +14,9 @@ const defaultMenu = {
   before: `
 ☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝖯𝖱𝖤𝖬𝖨𝖴𝖬 ☠️
 ───────────────────────
-⎔ 𝘊𝘰𝘳𝘦_𝘓𝘪𝘯𝘬: %name
+⎔ 𝘊𝘰𝘳𝘦_𝘓𝘪𝘯𝘬: %mention
 ⎔ 𝘗𝘳执行_𝘙𝘢𝘯𝘬: %role
-⎔ 𝘚𝘺𝘴_𝘚𝘵𝘢𝘵𝗎𝗌: 𝘌𝘓𝘐𝘛𝘌_𝘉𝘙𝘌𝘈𝘊𝘏
+⎔ 𝘚𝘺𝘴_𝘚𝘵𝘢𝘵𝘶𝘴: 𝘌𝘓𝘐𝘛𝘌_𝘉𝘙𝘌𝘈𝘊𝘏
 ───────────────────────
 
 » 𝘈𝘊𝘊𝘌𝘚𝘚𝘖 𝘕𝘖𝘋𝘖 𝘗𝘙𝘐𝘝𝘈𝘛𝘖 𝘐𝘕 𝘊𝘖𝘙𝘚𝘖...
@@ -25,31 +24,28 @@ const defaultMenu = {
   header: 'ョ ── %category 𪚥',
   body: '    ⤿ 👑 %cmd ╳',
   footer: '͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞ ͟͟͞͞\n',
-  after: `_𝘚𝘺𝘴𝘵𝘦𝘮 𝘸𝘪𝘭𝘭 𝘯𝘰𝘵 𝘳𝘦𝘉𝘰𝘰𝘵. 𝘌𝘯𝘫𝘰ย 𝘵𝘩𝗲 𝘤𝘩𝘢𝘰𝘴._`
+  after: `_𝘚𝘺𝘴𝘵𝘦𝘮 𝘸𝘪𝘭𝘭 𝘯𝘰𝘵 𝘳𝘦𝘉𝘰𝘰𝘵. 𝘌𝘯𝘫𝘰𝘺 𝘵𝘩𝘦 𝘤𝘩𝘢𝘰𝘴._`
 }
 
 let handler = async (m, { conn, usedPrefix: _p }) => {
-  let tags = {
-    'prem': '𝘚𝘠𝘚𝘛𝘌𝘔_𝘔𝘈𝘓𝘍𝘜𝘕𝘊𝘛𝘐𝘖𝘕_𝘗𝘙𝘌𝘔'
-  }
-
   try {
     await conn.sendPresenceUpdate('composing', m.chat)
 
+    let mention = `@${m.sender.split('@')[0]}`
     let user = global.db.data.users[m.sender] || {}
     let { level = 0, role = 'User' } = user
-    let name = await conn.getName(m.sender)
-    let _uptime = process.uptime() * 1000
-    let uptime = clockString(_uptime)
+    let uptime = clockString(process.uptime() * 1000)
+    let tags = { 'prem': '𝘚𝘠𝘚𝘛𝘌𝘔_𝘔𝘈𝘓𝘍𝘜𝘕𝘊𝘛𝘐𝘖𝘕_𝘗𝘙𝘌𝘔' }
 
-    // Filtraggio plugin premium
-    let help = Object.values(global.plugins).filter(p => !p.disabled && p.tags && (p.tags.includes('premium') || p.tags.includes('prem') || p.tags.includes('premio'))).map(p => ({
-      help: Array.isArray(p.help) ? p.help : [p.help],
-      prefix: 'customPrefix' in p,
-    }))
+    let help = Object.values(global.plugins)
+      .filter(p => !p.disabled && p.tags && (p.tags.includes('premium') || p.tags.includes('prem') || p.tags.includes('premio')))
+      .map(p => ({
+        help: Array.isArray(p.help) ? p.help : [p.help],
+        prefix: 'customPrefix' in p,
+      }))
 
     let _text = [
-      defaultMenu.before,
+      defaultMenu.before.replace(/%mention/g, mention),
       defaultMenu.header.replace(/%category/g, tags['prem']),
       help.map(menu => menu.help.map(cmd => 
         defaultMenu.body.replace(/%cmd/g, menu.prefix ? cmd : _p + cmd)
@@ -59,32 +55,23 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
     ].join('\n')
 
     let replace = {
-      '%': '%',
-      p: _p,
-      name, level, role, uptime
+      '%': '%', p: _p, level, role, uptime
     }
 
     let text = _text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join('|')})`, 'g'), (_, name) => '' + replace[name])
 
     await m.react('💥')
 
-    // Estrazione random dell'immagine .jpeg
     let randomImg = menuImages[Math.floor(Math.random() * menuImages.length)]
     let imageBuffer = null
-    
     try {
       imageBuffer = await fs.readFile(randomImg)
     } catch (e) {
-      console.log(`⚠️ Immagine ${randomImg} non trovata, tento il recupero...`)
       for (let img of menuImages) {
-        try {
-          imageBuffer = await fs.readFile(img)
-          break
-        } catch (err) {}
+        try { imageBuffer = await fs.readFile(img); break } catch (err) {}
       }
     }
 
-    // Invio finale con l'immagine random caricata in Buffer e contesto grafico aggiornato
     await conn.sendMessage(m.chat, {
       ...(imageBuffer ? { image: imageBuffer } : {}),
       caption: text.trim(),
