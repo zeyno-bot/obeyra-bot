@@ -3,8 +3,6 @@ import { performance } from 'perf_hooks'
 let handler = async (m, { conn }) => {
 
   let nomeDelBot = global.db.data.nomedelbot || `𝐄𝐑𝐑𝐎𝐑⁴⁰⁴`
-
-  // Identifica il destinatario
   let destinatario
 
   if (m.quoted && m.quoted.sender) {
@@ -17,7 +15,6 @@ let handler = async (m, { conn }) => {
 
   let nomeDestinatario = `@${destinatario.split('@')[0]}`
 
-  // Messaggio iniziale
   let { key } = await conn.sendMessage(m.chat, {
     text: `Ora sego ${nomeDestinatario}...`,
     mentions: [destinatario]
@@ -28,16 +25,17 @@ let handler = async (m, { conn }) => {
   ]
 
   for (let frame of animazione) {
-    await new Promise(resolve => setTimeout(resolve, 400))
-    await conn.sendMessage(m.chat, {
-      text: frame,
-      edit: key,
-      mentions: [destinatario]
-    })
+    await new Promise(resolve => setTimeout(resolve, 500))
+    try {
+      await conn.sendMessage(m.chat, {
+        text: frame,
+        edit: key,
+        mentions: [destinatario]
+      })
+    } catch (e) {}
   }
 
-  // Messaggio finale
-  await new Promise(resolve => setTimeout(resolve, 400))
+  await new Promise(resolve => setTimeout(resolve, 500))
 
   return conn.sendMessage(m.chat, {
     text: `Oh ${nomeDestinatario} ha sborrato! 😋💦`,
@@ -49,8 +47,6 @@ let handler = async (m, { conn }) => {
 handler.help = ['sega @tag']
 handler.tags = ['giochi']
 handler.command = /^(sega)$/i
-
-// 🔓 NESSUNA RESTRIZIONE
 handler.owner = false
 handler.admin = false
 handler.group = false
