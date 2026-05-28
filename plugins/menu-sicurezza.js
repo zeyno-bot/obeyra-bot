@@ -2,9 +2,9 @@ import { promises as fs } from 'fs'
 import { join } from 'path'
 
 const menuImages = [
-  './menu-1.jpeg',
-  './menu-2.jpeg',
-  './menu-3.jpeg'
+  './IMG-20260528-WA0003.jpg',
+  './image-34.jpg',
+  './image-17.jpg'
 ]
 
 let handler = async (m, { conn, usedPrefix: _p, command, args, isOwner, isAdmin }) => {
@@ -43,7 +43,7 @@ let handler = async (m, { conn, usedPrefix: _p, command, args, isOwner, isAdmin 
 
   if (!args.length || /menu|help/i.test(args[0])) {
     let text = `
-☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝗠 𝗔 𝗦 𝗧 𝗘 𝗥 ☠️
+𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓
 ───────────────────────
 ⎔ 𝘊𝘰𝘳𝘦_𝘓𝘪𝘯𝘬: ${mention}
 ⎔ 𝘚𝘦𝘤_𝘚𝘵𝘢𝘵𝘶𝘴: 𝘉𝘙𝘌𝘈𝘊𝘏𝘌𝘋
@@ -80,7 +80,7 @@ _𝘚𝘺𝘴𝘵𝘦𝘮 𝘸𝘪𝘭𝘭 𝘯𝘰𝘵 𝘳𝘦𝘉𝘰𝘰𝘵
         mentionedJid: [m.sender],
         forwardedNewsletterMessageInfo: {
           newsletterJid: '120363232743845068@newsletter',
-          newsletterName: "☠️ ᴇʀʀᴏʀ⁴⁰⁴ // ᴍᴀsᴛᴇʀ sᴇᴄᴜʀɪᴛʏ ☠️"
+          newsletterName: "𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓"
         }
       }
     }, { quoted: m })
