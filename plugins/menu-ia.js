@@ -5,9 +5,9 @@ import moment from 'moment-timezone'
 import os from 'os'
 
 const menuImages = [
-  './menu-1.jpeg',
-  './menu-2.jpeg',
-  './menu-3.jpeg'
+  './IMG-20260528-WA0003.jpg',
+  './image-34.jpg',
+  './image-17.jpg'
 ]
 
 const emojicategoria = {
@@ -24,7 +24,7 @@ let tags = {
 
 const defaultMenu = {
   before: `
-☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝘕𝘌𝘜𝘙𝘈𝘓 ☠️
+𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓
 ───────────────────────
 ⎔ 𝘊𝘰𝘳𝘦_𝘓𝘪𝘯𝘬: %mention
 ⎔ 𝘚𝘛𝘓_𝘓𝘝𝘓: %level
@@ -32,7 +32,7 @@ const defaultMenu = {
 ⎔ 𝘎𝘩𝘰𝘴𝘵_𝘜𝘴𝘦𝘳𝘴: %totalreg
 ───────────────────────
 
-» 𝘈𝘊𝘊𝘌𝘚𝘚𝘖 𝘙𝘌𝘛𝘌 𝘕𝘌𝘜𝘙𝘈𝘓𝘌 𝘐𝘕 𝘊𝘎𝘙𝘚𝘖...
+» 𝘈𝘊𝘊𝘌𝘚𝘚𝘖 𝘙𝘌𝘛𝘌 𝘕𝘌𝘜𝘙𝘈𝘓𝘌 𝘐𝘕 𝘊𝘖𝘙𝘚𝘖...
 `.trimStart(),
   header: 'ョ ── %category 𪚥',
   body: '    ⤿ %emoji %cmd ╳',
@@ -106,7 +106,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
         mentionedJid: [m.sender],
         forwardedNewsletterMessageInfo: {
           newsletterJid: '120363232743845068@newsletter',
-          newsletterName: "☠️ ᴇʀʀᴏʀ⁴⁰⁴ // ɴᴇᴜʀᴀʟ ɴᴇᴛ ☠️"
+          newsletterName: "𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓"
         }
       }
     }, { quoted: m })
