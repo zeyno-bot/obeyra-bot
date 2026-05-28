@@ -37,6 +37,7 @@ const countries = [
   { name: 'India 🇮🇳', prefix: '+91' },
   { name: 'Indonesia 🇮🇩', prefix: '+62' },
   { name: 'Filippine 🇵🇭', prefix: '+63' }
+  { name: 'Egitto 🇪🇬', prefix: '+20' }
 ];
 
 async function getNumbers() {
