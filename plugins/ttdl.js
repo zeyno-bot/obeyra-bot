@@ -44,7 +44,7 @@ let handler = async (m, { conn, args }) => {
 ❤️ ${data.data.digg_count} like
 👁️ ${data.data.play_count} views
 
-> 𝐄𝐑𝐑𝐎𝐑⁴⁰⁴`
+> 𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓`
         }, { quoted: m });
 
     } catch (err) {
