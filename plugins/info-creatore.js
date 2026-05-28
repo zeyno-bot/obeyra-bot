@@ -2,10 +2,10 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   
   // Se il comando eseguito è 'git' o 'insta', manda solo il link e chiudi la funzione
   if (command === 'git') {
-    return await conn.reply(m.chat, '💻 *GitHub:* https://github.com/BLOOD212/𝐄𝐑𝐑𝐎𝐑⁴⁰⁴-BOT', m)
+    return await conn.reply(m.chat, '💻 *GitHub:* https://github.com/zeyno-bot/obeyra-bot', m)
   }
   if (command === 'insta') {
-    return await conn.reply(m.chat, '📸 *Instagram:* https://www.instagram.com/blood_ilreal', m)
+    return await conn.reply(m.chat, '📸 *Instagram:* https://www.instagram.com/Endy.2011_', m)
   }
 
   // Se invece il comando è 'owner' o 'creatore', manda il box con i bottoni
@@ -19,13 +19,13 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 ecco i riferimenti ufficiali del mio creatore.
 
 *┏━━━━━━━━━━━━━━━━┓*
-*┃* 👤 *OWNER:* Blood
+*┃* 👤 *OWNER:* Endy
 *┃* 🪐 *STATUS:* Online
 *┃* 💻 *DEV:* JavaScript / Node.js
 *┗━━━━━━━━━━━━━━━━┛*
 
 ━━━━━━━━━━━━━━━━━━━━
-   *😈 𝖇𝖑𝖔𝖔𝖉 𝖉𝖔𝖒𝖎𝖓𝖆 ⚡*
+   *😈 𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓 ⚡*
 ━━━━━━━━━━━━━━━━━━━━`.trim()
 
   const buttons = [
@@ -37,7 +37,7 @@ ecco i riferimenti ufficiali del mio creatore.
 
   const buttonMessage = {
       text: text,
-      footer: 'ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʙʟᴅ ʙʟᴏᴏᴅ ʙᴏᴛ',
+      footer: 'powered by endy',
       buttons: buttons,
       headerType: 1,
       mentions: [m.sender]
