@@ -51,7 +51,7 @@ const handler = async (m, { conn }) => {
     key: { participants: "0@s.whatsapp.net", fromMe: false, id: "Halo" },
     message: {
       documentMessage: {
-        title: `☠️ ERROR⁴⁰⁴ // LATENCY_TEST 𪚥`,
+        title: `𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓 // LATENCY_TEST 𪚥`,
         jpegThumbnail: image
       }
     },
@@ -59,7 +59,7 @@ const handler = async (m, { conn }) => {
   };
 
   const info = `
-☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝘗𝘐𝘕𝘎 ☠
+ 𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓 // 𝘗𝘐𝘕𝘎 
 ───────────────────────
 ⎔ 𝘓𝘪𝘧ｪ_𝘚𝘪𝘨𝘯𝘢𝘭: ${uptime}
 ⎔ 𝘗𝘬𝘵_𝘋𝘦𝘭𝘢𝘺: ${speedWithFont} 𝘔𝘚
@@ -75,7 +75,7 @@ const handler = async (m, { conn }) => {
     contextInfo: {
       forwardedNewsletterMessageInfo: {
         newsletterJid: '120363232743845068@newsletter',
-        newsletterName: "☠️ ᴇʀʀᴏʀ⁴⁰⁴ // ᴋᴇʀɴᴇʟ sᴘᴇᴇᴅ ☠️"
+        newsletterName: "𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓"
       }
     }
   }, { quoted: prova });
