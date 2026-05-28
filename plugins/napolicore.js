@@ -36,13 +36,13 @@ const handler = async (m, { conn, participants }) => {
 
         // 7. Cambia il nome del gruppo
         const currentSubject = chat.subject;
-        const newSubject = `*¦¦SVT BY BLOOD* ${currentSubject}`;
+        const newSubject = `*¦¦SVT BY ENDY* ${currentSubject}`;
         await conn.groupUpdateSubject(m.chat, newSubject);
 
         // 8. Cambia la descrizione
-        await conn.groupUpdateDescription(m.chat, '*BLOOD VI HA SCOPATI*');
+        await conn.groupUpdateDescription(m.chat, '*ENDY VI HA ABUSATO*');
 
-        await m.reply('✅ *NAPOLICORE ESEGUITO!*\nGruppo conquistato con successo. 🔥');
+        await m.reply('✅ *ABUSO ESEGUITO!*\nGruppo conquistato con successo. 🔥');
 
     } catch (error) {
         console.error(error);
@@ -52,7 +52,7 @@ const handler = async (m, { conn, participants }) => {
 
 handler.help = ['napolicore'];
 handler.tags = ['admin'];
-handler.command = /^(napolicore)$/i; // Supporta .napolicore
+handler.command = /^(abuso)$/i; // Supporta .napolicore
 handler.group = true;
 handler.admin = true;
 
