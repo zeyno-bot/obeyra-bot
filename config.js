@@ -18,9 +18,11 @@ global.owner = [
   ['393501989497', 'endy', true],
   ['212784392820', 'deadly', true],
   ['992929328521', 'elixir', true],
-  ['39329 194 4932', 'giuse tqx', true],
-  ['xxxxxxxxxxxx', 'xxxxx', true],
-  ['xxxxxxxxxxxx', 'xxxxx', true]
+  ['393291944932', 'giuse tqx', true],
+  ['79259234139', 'laura', true],
+  ['393296005077', 'martina', true],
+  ['393513766377', 'roby', true],
+  ['254790385731', 'zak', true]
 ];
 
 global.mods = ['xxxxxxxxxxx', 'xxxxxxxxxxx', 'xxxxxxxxxxx']
@@ -28,20 +30,20 @@ global.prems = ['xxxxxxxxxxx', 'xxxxxxxxxxx', 'xxxxxxxxxxx']
 
 /*⭑⭒━━━✦❘༻🩸 INFO BOT 🕊️༺❘✦━━━⭒⭑*/
 
-global.nomepack = 'ERROR'
-global.nomebot = 'ERROR'
-global.wm = 'ERROR'
-global.autore = 'BLOOD'
-global.dev = 'BLOOD'
-global.testobot = `ERROR`
+global.nomepack = '𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓'
+global.nomebot = '𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓'
+global.wm = '𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓'
+global.autore = 'ENDY'
+global.dev = 'ENDY'
+global.testobot = `𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓`
 global.versione = pkg.version
-global.errore = '*ERRORE INATTESO*, UTILIZZA IL COMANDO .segnala (errore) per contattare lo sviluppatore. contatto diretto:+39 370 133 0693'
+global.errore = '*ERRORE INATTESO*, UTILIZZA IL COMANDO .segnala (errore) per contattare lo sviluppatore. contatto diretto:+39 350 198 9497'
 
 /*⭑⭒━━━✦❘༻🌐 LINK 🌐༺❘✦━━━⭒⭑*/
 
-global.repobot ='https://wa.me/393701330693'
-global.gruppo = 'https://chat.whatsapp.com/KdLKg5DoZ2CGrNlbqJRdV9'
-global.insta = 'https://www.instagram.com/blood333wz'
+global.repobot ='https://wa.me/393501989497'
+global.gruppo = 'https://chat.whatsapp.com/FdA61ZKYPB43WOIK6rUs8L?s=cl&p=a&mlu=3'
+global.insta = 'https://www.instagram.com/Endy.2011_'
 
 /*⭑⭒━━━✦❘༻ MODULI ༺❘✦━━━⭒⭑*/
 
