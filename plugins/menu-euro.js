@@ -2,14 +2,14 @@ import { promises as fs } from 'fs'
 import { join } from 'path'
 
 const menuImages = [
-  './menu-1.jpeg',
-  './menu-2.jpeg',
-  './menu-3.jpeg'
+  './IMG-20260528-WA0003.jpg',
+  './image-34.jpg',
+  './image-17.jpg'
 ]
 
 const defaultMenu = {
   before: `
-☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰  // 𝗘 𝗖 𝗢 𝗡 𝗢 𝗠 𝗬 ☠️
+𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓
 ───────────────────────
 ⎔ 𝘊𝘰𝘳𝘦_𝘓𝘪𝘯𝘬: %mention
 ⎔ 𝘝𝘢𝘶𝘭𝘵_𝘉𝘢𝘭: %eris 𝘌𝘳𝘪𝘴
@@ -80,7 +80,7 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
         mentionedJid: [m.sender],
         forwardedNewsletterMessageInfo: {
           newsletterJid: '120363232743845068@newsletter',
-          newsletterName: "☠️ ᴇʀʀᴏʀ⁴⁰⁴ // ʙʟᴅ ᴇᴄᴏɴᴏᴍʏ ☠️"
+          newsletterName: "𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓"
         }
       }
     }, { quoted: m })
