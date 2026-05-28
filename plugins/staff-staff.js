@@ -1,24 +1,24 @@
 let handler = async (m, { conn, command, usedPrefix }) => {
     let staff = `
-ㅤㅤ⋆｡˚『 ╭ \`STAFF BLD BOT\` ╯ 』˚｡⋆\n╭\n│
+ㅤㅤ⋆｡˚『 ╭ \`STAFF OBEYRA BOT\` ╯ 』˚｡⋆\n╭\n│
 │ 『 🤖 』 \`Bot:\` *${global.nomebot}*
 │ 『 🍥 』 \`Versione:\` *${global.versione}*
 │
 │⭒─ׄ─『 👑 \`Sviluppatore\` 』 ─ׄ─⭒
 │
-│ • \`Nome:\` *𝐁𝐋𝐎𝐎𝐃#ᵛᵉˡᶦᵗʰ*
+│ • \`Nome:\` *Endy*
 │ • \`Ruolo:\` *Creatore / dev*
-│ • \`Contatto:\` @393701330693
+│ • \`Contatto:\` @393501989497
 │
 │⭒─ׄ─『 🛡️ \`Moderatori\` 』 ─ׄ─⭒
 │
-│ • \`Nome:\` *Death*
+│ • \`Nome:\` *elixir &     │laura(moderatori invisibili ma ce │ne sono altri)*
 │ • \`Ruolo:\` *Moderatore*
 │─ׄ─『 📌 \`Info Utili\` 』 ─ׄ─⭒
 │
-│ • \`GitHub:\` *github.com/BLOOD212*
-│ • \`Supporto:\` @393701330693
-│ • *instagram.com/blood_ilreal*
+│ • \`GitHub:\` *github.com/zeyno-bot*
+│ • \`Supporto:\` @393501989497
+│ • *instagram.com/Endy.2011_*
 │
 *╰⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*`;
     await conn.reply(
@@ -49,24 +49,24 @@ let handler = async (m, { conn, command, usedPrefix }) => {
                     vcard: `BEGIN:VCARD
 VERSION:3.0
 FN:blood
-ORG:𝐄𝐑𝐑𝐎𝐑⁴⁰⁴ - Creatore
-TEL;type=CELL;type=VOICE;waid=393476686131:+393476686131
+ORG:𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓 - Creatore
+TEL;type=CELL;type=VOICE;waid=393501989497:+393501989497
 END:VCARD`
                 },
                 {
                     vcard: `BEGIN:VCARD
 VERSION:3.0
 FN: DEATH 
-ORG:𝐄𝐑𝐑𝐎𝐑⁴⁰⁴ - Moderatore
-TEL;type=CELL;type=VOICE;waid=67078163216:+67078163216
+ORG:𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓 - Moderatore
+TEL;type=CELL;type=VOICE;waid=79259234139:+79259234139
 END:VCARD`
                 },
                 {
                     vcard: `BEGIN:VCARD
 VERSION:3.0
 FN:
-ORG:VareBot -
-TEL;type=CELL;type=VOICE;waid=393511082922:+393511082922
+ORG:𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓 -
+TEL;type=CELL;type=VOICE;waid=573217871395:+573217871395
 END:VCARD`
                 }
             ]
