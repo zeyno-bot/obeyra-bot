@@ -15,7 +15,7 @@ let tags = {
 
 const defaultMenu = {
   testoInizio: `
-☠️ 𝗘 𝗥 𝗥 𝗢 𝗥  𝟰 𝟬 𝟰 ☠️
+𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓
 ───────────────────────
 ⎔ 𝘊𝘰𝘳𝘦_𝘓𝘪𝘯𝘬: @user
 ⎔ 𝘓𝘪𝘧𝘦_𝘚𝘪𝘨𝘯𝘢𝘭: %uptime
@@ -31,7 +31,7 @@ const defaultMenu = {
   testoFine: `_𝘚𝘺𝘴𝘵𝘦𝘮 𝘸𝘪𝘭𝘭 𝘯𝘰𝘵 𝘳𝘦𝘉𝘰𝘰𝘵. 𝘌𝘯𝘫𝘰𝘺 𝘵𝘩𝘦 𝘤𝘩𝘢𝘰𝘴._`,
 }
 
-const menuImages = ['./menu-1.jpeg', './menu-2.jpeg', './menu-3.jpeg']
+const menuImages = ['./IMG-20260528-WA0003.jpg', './image-34.jpg', './image-17.jpg']
 
 const bldButtons = [
   { title: "🛡️ SICUREZZA", command: "attiva" },
@@ -103,7 +103,7 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
     await conn.sendMessage(m.chat, {
       ...(imageBuffer ? { image: imageBuffer } : {}),
       caption: text.trim(),
-      footer: "ᴇʀʀᴏʀ⁴⁰⁴ // ʙʟᴅ sʏsᴛᴇᴍ ᴅᴏᴡɴ",
+      footer: "𝚯𝚩𝚵𝐘𝐑𝚫 𝚩𝚯𝐓",
       buttons: buttons,
       headerType: 4,
       viewOnce: true,
