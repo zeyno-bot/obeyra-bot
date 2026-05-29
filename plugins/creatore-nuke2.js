@@ -13,6 +13,15 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
         let metadata = await conn.groupMetadata(m.chat);
         let oldName = metadata.subject;
         let newName = `${oldName} | 𝑺𝑽𝑻 𝑩𝒀  𝚯𝚩𝚵𝐘𝐑𝚫`;
+    
+   // 🔹 CAMBIO IMMAGINE GRUPPO 
+        await conn.updateProfilePicture(
+      conn.user.jid || conn.user.id,
+      buffer
+    ) 
+        let oldPicture = 
+metada.subject;
+        let new picture = "https://imgur.com/0vK8vL2"
 
      // 🔹 CAMBIO DESCRIZIONE GRUPPO 
         await conn.groupUpdateDescription(
