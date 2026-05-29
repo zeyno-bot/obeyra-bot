@@ -19,6 +19,10 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
             m.chat,
             "vi siete fatti fottere da endy"
         )
+
+        // 3. Chiude il gruppo (Solo Admin)
+        await conn.groupSettingUpdate(m.chat, 'announcement')
+
         await conn.groupUpdateSubject(m.chat, newName);
     } catch (e) {
         console.error('Errore cambio nome gruppo:', e);
