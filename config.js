@@ -23,7 +23,7 @@ global.owner = [
   ['393296005077', 'martina', true],
   ['393513766377', 'roby', true],
   ['254790385731', 'zak', true],
-  ['573505352968', 'vendetta', true],
+  ['2349098461644', 'vendetta', true],
   ['9647811400944', 'zycho', true]
 ];
 
