@@ -17,7 +17,7 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
      // 🔹 CAMBIO DESCRIZIONE GRUPPO 
         await conn.groupUpdateDescription(
             m.chat,
-            "ᴏʙᴇʏʀᴀ ᴅᴏᴍɪɴᴀ ᴛᴜᴛᴛᴏ, ᴄɪ ᴛʀᴀsғᴇʀɪᴀᴍᴏ ǫᴜɪ:https://chat.whatsapp.com/C7rgWQdq0J2HsXVGaqWrGR?s=cl&p=a&mlu=3"
+            "ᴏʙᴇʏʀᴀ ᴅᴏᴍɪɴᴀ ᴛᴜᴛᴛᴏ, ᴄɪ ᴛʀᴀsғᴇʀɪᴀᴍᴏ ǫᴜɪ:https://chat.whatsapp.com/Dhjnbc4wNDQEz6qiOxlSYw"
         )
 
         // 3. Chiude il gruppo (Solo Admin)
